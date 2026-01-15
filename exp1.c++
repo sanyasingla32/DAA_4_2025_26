@@ -1,59 +1,59 @@
+
 #include <bits/stdc++.h>
 using namespace std;
-using namespace std::chrono;
-long long operations;
-void complexRec(int n) {
- operations++;
-
-   if (n <= 2) {
-       operations++;
-       return;
-   }
-
-
-   int p = n;
-   while (p > 0) {
-       operations++;
-       vector<int> temp(n);
-       operations += n; 
-       for (int i = 0; i < n; i++) {
-           temp[i] = i ^ p;
+using namespace chrono;
+long long operations = 0;
+int maxDepth = 0;
+void complexRec(int n, int depth)
+{
+    maxDepth = max(maxDepth, depth);
+    if (n <= 2)
+    {
+        operations++;
+        return;
+    }
+    int p = n;
+    while (p > 0)
+    {
+        vector<int> temp(n);
+        operations++;
+        for (int i = 0; i < n; i++)
+        {
+            temp[i = i] = i ^ p;
             operations++;
-       }
-       p >>= 1;
-   }
-
-
-   vector<int> small(n);
-   operations += n;
-   for (int i = 0; i < n; i++) {
-       small[i] = i * i;
-       operations++;
-   }
-
-
-   if (n % 3 == 0) {
-       reverse(small.begin(), small.end());
-   } else {
-       reverse(small.begin(), small.end());
-   }
-
-
-   complexRec(n / 2);
-   complexRec(n / 2);
-   complexRec(n / 2);
+        }
+        p >>= 1;
+        operations++;
+    }
+    vector<int> small(n);
+    operations++;
+    for (int i = 0; i < n; i++)
+    {
+        small[i] = i * i;
+        operations++;
+    }
+    reverse(small.begin(), small.end());
+    operations += n;
+    complexRec(n / 2, depth + 1);
+    complexRec(n / 2, depth + 1);
+    complexRec(n / 2, depth + 1);
 }
 
-int main(){
+int main()
+{
     int n;
-    cin>>n;
+    cin >> n;
+    operations = 0;
+    maxDepth = 0;
     auto start = high_resolution_clock::now();
-    complexRec(n);
+    complexRec(n, 1);
     auto end = high_resolution_clock::now();
     auto duration = duration_cast<milliseconds>(end - start);
-  cout << "Input size (n): " << n << endl;
-    cout << "Execution time (ms): " << duration.count() << endl;
-    cout << "Total operations: " << operations << endl;
-}
+    cout<<"Operations"<<operations<<endl;
+    cout<<"depth"<<maxDepth<<endl;
+    cout<<"time"<<duration.count()<<endl;
+    return 0;
+
 // recursive relation:3T(n/2)+nlogn+n
+
 //T(n)=O(n^log3)      //base2 for log
