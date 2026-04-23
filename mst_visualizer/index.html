@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stunning MST Visualizer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="glass-panel">
+        <h1>MST Visualizer</h1>
+        <p class="subtitle">Click to add nodes. Click two nodes to connect them.</p>
+        
+        <div class="controls">
+            <button id="btn-kruskal" class="glow-btn">Run Kruskal's</button>
+            <button id="btn-prim" class="glow-btn">Run Prim's</button>
+            <button id="btn-clear" class="ghost-btn">Clear Board</button>
+            <button id="btn-delete-node" class="ghost-btn danger-btn hidden">Delete Selected Node</button>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-box">
+                <span class="label">Nodes</span>
+                <span id="stat-nodes" class="value">0</span>
+            </div>
+            <div class="stat-box">
+                <span class="label">Total Cost</span>
+                <span id="stat-cost" class="value">0</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edge Weight Modal -->
+    <div id="weight-modal" class="modal-overlay hidden">
+        <div class="modal-content glass-panel">
+            <h2>Enter Edge Cost</h2>
+            <input type="number" id="weight-input" placeholder="e.g. 10" autofocus>
+            <div class="modal-actions">
+                <button id="btn-delete-edge" class="ghost-btn danger-btn hidden">Delete</button>
+                <button id="btn-cancel-weight" class="ghost-btn">Cancel</button>
+                <button id="btn-confirm-weight" class="glow-btn">Set Cost</button>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="graphCanvas"></canvas>
+
+    <script src="script.js"></script>
+</body>
+</html>
